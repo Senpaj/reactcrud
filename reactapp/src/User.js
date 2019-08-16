@@ -18,11 +18,14 @@ const User = ({props}) => {
             <td>{props.username}</td>
             <td>{props.email}</td>
             <td>{props.user_id}</td>
-            <td><button onClick={toggleEditPopUp} className="open">Edit</button>
-            <button onClick={toggleDeletePopUp} className="open">Delete</button></td>
+            <td>
+                <button onClick={toggleEditPopUp} className="open">Edit</button>
+                {showEditPopUp ? <UserForm toggleProp={toggleEditPopUp.bind(User)} user={props} action={"edit"}/> : null}
             
-            {showEditPopUp ? <UserForm toggleProp={toggleEditPopUp.bind(User)} user={props} action={"edit"}/> : null}
-            {showDeletePopUp ? <DeleteUserForm toggleProp={toggleDeletePopUp.bind(User)} user={props}/> : null}
+                <button onClick={toggleDeletePopUp} className="open">Delete</button>
+                {showDeletePopUp ? <DeleteUserForm toggleProp={toggleDeletePopUp.bind(User)} user={props}/> : null}
+            </td>
+            
         </tr>
 
     );
