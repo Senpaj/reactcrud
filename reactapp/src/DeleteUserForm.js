@@ -23,10 +23,10 @@ const DeleteUserForm = ({toggleProp, user}) => {
                     <div onClick={toggleProp} className="close">&times;</div>  
                     
                     <form className="form-control">
-                        <label>Name:</label><input type="text" name="name" defaultValue={user.name} readonly/>
-                        <label>Username:</label><input type="text" name="username" defaultValue={user.username} readonly/>
-                        <label>E-Mail:</label><input type="text" name="email" defaultValue={user.email} readonly/>
-                        <label>Phone:</label><input type="text" name="phone" defaultValue={user.phone} readonly/>
+                        <label>Name:</label><input type="text" name="name" defaultValue={user.name} readOnly/>
+                        <label>Username:</label><input type="text" name="username" defaultValue={user.username} readOnly/>
+                        <label>E-Mail:</label><input type="text" name="email" defaultValue={user.email} readOnly/>
+                        <label>Phone:</label><input type="text" name="phone" defaultValue={user.phone} readOnly/>
                         <input type="submit" value="Confirm deletion" onClick={e => onSubmit(e)} />
                     </form>                    
                 </div>
