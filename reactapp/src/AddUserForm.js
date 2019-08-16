@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './style.css';
 import ShowErrors from './ShowErrors';
 
 const AddUserForm = ({toggleProp}) => {
@@ -34,16 +33,9 @@ const AddUserForm = ({toggleProp}) => {
     console.log(inputs);
 
     function updateInputsArray(index, evt) {
-        // var values = Object.assign({}, inputs);
-        // var newInput = `${index}`;
-        // values[newInput] = evt.target.value;
-    
-        // setInputs(values);
         const updatedArray = [...inputs];
         updatedArray[0][index] = evt.target.value;
         setInputs(updatedArray);
-
-        console.log(inputs);
     }
     
     function updateInputsArraySection(section, index, evt) {
@@ -73,7 +65,6 @@ const AddUserForm = ({toggleProp}) => {
             toggleProp();
             window.location.reload();
         }
-
     }
     return (
         <div>

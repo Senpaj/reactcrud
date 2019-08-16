@@ -1,12 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import User from './User';
-import AddUserForm from './AddUserForm';
-
+import UserForm from './UserForm';
 const UserInterface = () => {
     
     const [users, setUsers] = useState([]);
     const [showNewUserPopUp, setshowNewUserPopUp] = useState(false);
-
+    const userDataFormat =
+        {
+            "user_id":'',
+            "name":"",
+            "username":"",
+            "email":"",
+            "phone":"",
+            "website":"",
+            "address":{
+                "street":"",
+                "suite":"",
+                "city":"",
+                "zipcode":"",
+                "geo":{
+                    "lat":"",
+                    "lng":""
+                },
+            },
+            "company":{
+                "name":"",
+                "catchPhrase":"",
+                "bs":""
+            }
+        };
     useEffect(() => {
         getUsers();
     }, []);
@@ -36,7 +58,8 @@ const UserInterface = () => {
         <div>
             <button onClick={toggleNewUserPopUp} className="open">Add</button>
             <button onClick={addUserFromAPI} className="open">Add from API</button>
-            {showNewUserPopUp ? <AddUserForm toggleProp={toggleNewUserPopUp.bind(User)}/> : null}
+
+            {showNewUserPopUp ? <UserForm toggleProp={toggleNewUserPopUp.bind(User)} user={userDataFormat} action="add"/> : null}
             <table className="all-users-table">
                 <thead>
                     <tr>

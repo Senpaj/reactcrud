@@ -1,12 +1,11 @@
 import React, {useState} from "react";
-import EditUserForm from './EditUserForm';
+import UserForm from './UserForm';
 import DeleteUserForm from './DeleteUserForm';
 
 const User = ({props}) => {
 
     const [showEditPopUp, setshowEditPopUp] = useState(false);
     const [showDeletePopUp, setshowDeletePopUp] = useState(false);
-
     const toggleEditPopUp = () => {
         setshowEditPopUp(!showEditPopUp);
     }
@@ -22,7 +21,7 @@ const User = ({props}) => {
             <td><button onClick={toggleEditPopUp} className="open">Edit</button>
             <button onClick={toggleDeletePopUp} className="open">Delete</button></td>
             
-            {showEditPopUp ? <EditUserForm toggleProp={toggleEditPopUp.bind(User)} user={props}/> : null}
+            {showEditPopUp ? <UserForm toggleProp={toggleEditPopUp.bind(User)} user={props} action={"edit"}/> : null}
             {showDeletePopUp ? <DeleteUserForm toggleProp={toggleDeletePopUp.bind(User)} user={props}/> : null}
         </tr>
 
