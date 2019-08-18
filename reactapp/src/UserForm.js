@@ -30,12 +30,13 @@ const UserForm = ({toggleProp, user, action}) => {
                     data : inputs["0"]
                 })
             }).then(response => response.json());
-            console.log("po fetch: ", response.error);
             if(response.errors != null && Object.keys(response.errors).length > 0){
                 setErrors(response.errors);
             }
             else
                 toggleProp();
+                alert("User successfully edited");
+                window.location.reload();
         }
         else if (action === "add"){
             const response = await fetch('http://127.0.0.1:8000/api/users/', {
@@ -50,6 +51,7 @@ const UserForm = ({toggleProp, user, action}) => {
             }
             else{
                 toggleProp();
+                alert("User successfully added");
                 window.location.reload();
             }
         }
@@ -58,7 +60,7 @@ const UserForm = ({toggleProp, user, action}) => {
         <div>
             <div className="overlay">
                 <div className="popup">
-                    <h2>Edit user</h2>
+                    <h2>{action === "edit" ? "Edit user" : "Add user"}</h2>
                     <div onClick={toggleProp} className="close">&times;</div>  
                     
                     <form className="form-control">

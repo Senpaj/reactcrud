@@ -20,10 +20,10 @@ const User = ({props}) => {
             <td>{props.user_id}</td>
             <td>
                 <button onClick={toggleEditPopUp} className="open">Edit</button>
-                {showEditPopUp ? <UserForm toggleProp={toggleEditPopUp.bind(User)} user={props} action={"edit"}/> : null}
+                {showEditPopUp ? <UserForm toggleProp={toggleEditPopUp} user={props} action={"edit"}/> : null}
             
                 <button onClick={toggleDeletePopUp} className="open">Delete</button>
-                {showDeletePopUp ? <DeleteUserForm toggleProp={toggleDeletePopUp.bind(User)} user={props}/> : null}
+                {showDeletePopUp ? <DeleteUserForm toggleProp={toggleDeletePopUp} user={props}/> : null}
             </td>
             
         </tr>

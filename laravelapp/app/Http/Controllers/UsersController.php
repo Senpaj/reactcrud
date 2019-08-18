@@ -21,7 +21,7 @@ class UsersController extends Controller
     }
     public function show($id)
     {
-        return Users::find($id);
+        return new UsersCollectionResource(Users::where('user_id', $id)->get());
     }
     /**
      * 
@@ -30,7 +30,6 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $body = $request->all();
         $data = $request["data"];
         $validator = $this->validator($data);
@@ -75,36 +74,32 @@ class UsersController extends Controller
         ]);
         $model->geo()->save($geo);
         
-        return response()->json("sd", 201);
+        return response()->json("Inserted", 201);
     }
     /**
-     * Handles an error response formatting it according to our spec.
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function update(Request $request, $id)
     {
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $data = $request['data'];
+        $validator = $this->validator($data);
 
-        $body = $request->all();
-        $userProfile = $body['data'];
-        $validator = $this->validator($userProfile);
         if ($validator->fails()) {
             $error = $validator->errors();
             return response()->json(['errors' => $error])->setStatusCode(422);
         }
 
         $address = Address::where('address_user', $id)->update([
-            'city'      => $request["data"]["address"]["city"],
-            'street'    => $request["data"]["address"]["street"],
-            'suite'    => $request["data"]["address"]["suite"],
-            'zipcode'    => $request["data"]["address"]["zipcode"]
+            'city'      => $data["address"]["city"],
+            'street'    => $data["address"]["street"],
+            'suite'    => $data["address"]["suite"],
+            'zipcode'    => $data["address"]["zipcode"]
         ]);
         
-        $geo = Geo::where('geo_user', $id)->update($request["data"]["address"]["geo"]);
-        $company = Company::where('company_user', $id)->update($request["data"]["company"]);
+        $geo = Geo::where('geo_user', $id)->update($data["address"]["geo"]);
+        $company = Company::where('company_user', $id)->update($data["company"]);
 
-        $data = $request["data"];
         $me = Users::find($id)->update([
             'name'      => $data["name"],
             'username'  => $data["username"],
@@ -113,7 +108,7 @@ class UsersController extends Controller
             'website'   => $data["website"]
         ]);
 
-        return response()->json("fgfgh", 201);
+        return response()->json("Updated", 201);
     }
 
     public function delete($id)
@@ -123,7 +118,7 @@ class UsersController extends Controller
             $user->deleted = 1;
             $user->save();
         }
-        return response()->json($user, 204);
+        return response()->json("Deleted", 204);
     }
     private function validator($data)
     {

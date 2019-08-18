@@ -34,7 +34,7 @@ const UserInterface = () => {
     }, []);
     
     const getUsers = async () => {
-        const response = await fetch('http://127.0.0.1:8000/api/allusers');
+        const response = await fetch('http://127.0.0.1:8000/api/users');
         const data = await response.json();
         setUsers(data.data);
     };
@@ -48,8 +48,9 @@ const UserInterface = () => {
                 data : values["0"]
             })
           });
-          window.location.reload();
-    };
+          alert("User successfully added from API");
+          window.location.reload();    
+        };
     const toggleNewUserPopUp = () => {
         setshowNewUserPopUp(!showNewUserPopUp);
     }
@@ -59,7 +60,7 @@ const UserInterface = () => {
             <button onClick={toggleNewUserPopUp} className="open">Add</button>
             <button onClick={addUserFromAPI} className="open">Add from API</button>
 
-            {showNewUserPopUp ? <UserForm toggleProp={toggleNewUserPopUp.bind(User)} user={userDataFormat} action="add"/> : null}
+            {showNewUserPopUp ? <UserForm toggleProp={toggleNewUserPopUp} user={userDataFormat} action="add"/> : null}
             <table className="all-users-table">
                 <thead>
                     <tr>

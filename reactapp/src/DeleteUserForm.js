@@ -13,6 +13,7 @@ const DeleteUserForm = ({toggleProp, user}) => {
             }
         });
         toggleProp();
+        alert("User successfuly deleted");
         window.location.reload();
     }
     return (
